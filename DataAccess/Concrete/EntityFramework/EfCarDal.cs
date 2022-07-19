@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join b in rentCarContext.BRANDS
                              on c.BrandId equals b.BrandId
                              join k in rentCarContext.COLORS
-                             on c.ColorId equals k.ColorId
+                             on c.ColorId equals k.Id
                              select new CarDetailsDto { CarId = c.Id, BrandName = b.BrandName,
                              CarName= c.Description,ColorName=k.ColorName,DailyPrice=c.DailyPrice};
                 return result.ToList();

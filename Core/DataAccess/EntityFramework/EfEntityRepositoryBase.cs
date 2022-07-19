@@ -50,12 +50,12 @@ namespace Core.DataAccess.EntityFramework
                 rentCarContext.SaveChanges();
             }
         }
-        //public TEntity Get(Expression<Func<TEntity, bool>> filter)
-        //{
-        //    using (TRentCarContext rentCarContext = new TRentCarContext())
-        //    {
-        //        return rentCarContext.Set<TEntity>().SingleOrDefault(filter);
-        //    }
-        //}
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TRentCarContext rentCarContext = new TRentCarContext())
+            {
+                return rentCarContext.Set<TEntity>().SingleOrDefault(filter);
+            }
+        }
     }
 }
