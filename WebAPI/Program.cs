@@ -34,6 +34,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
          builder.RegisterModule(new AutofacBusinessModule());
      });
 
+builder.Services.AddControllers();
 
 
 

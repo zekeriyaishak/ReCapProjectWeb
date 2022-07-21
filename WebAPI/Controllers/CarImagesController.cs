@@ -15,27 +15,7 @@ namespace WebAPI.Controllers
         {
             _carImagesService = carImagesService;
         }
-        [HttpPost("add")]
-        public IActionResult Add(CarImage carImage)
-        {
-            var result = _carImagesService.AddRental(carImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpDelete("delete")]
-        public IActionResult Delete(CarImage carImage)
-        {
-            var result = _carImagesService.DeleteRental(carImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpGet("getall")]
+        [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             var result = _carImagesService.GetAll();
@@ -45,10 +25,34 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPatch("update")]
-        public IActionResult Update(CarImage carImage)
+
+        [HttpPost("Add")]
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carImagesService.UpdateRental(carImage);
+            var result = _carImagesService.Add(file, carImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("Update")]
+        public IActionResult Update([FromForm] IFormFile file, CarImage carImage)
+        {
+            var result = _carImagesService.Update(file, carImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpPost("Delete")]
+        public IActionResult Delete(CarImage carImage)
+        {
+            var result = _carImagesService.Delete(carImage);
             if (result.Success)
             {
                 return Ok(result);

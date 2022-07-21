@@ -3,10 +3,12 @@ using Business.Constants;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers.FileHelper.Abstract;
+using Core.Utilities.Helpers.FileHelper.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,58 +22,62 @@ namespace Business.Concrete
         ICarImageDal _carImageDal;
         IFileHelper _fileHelper;
 
-        public CarImageManager(ICarImageDal carImageDal, IFileHelper fileHelper)
+        public CarImageManager(ICarImageDal carImageDal,IFileHelper fileHelper)
         {
             _carImageDal = carImageDal;
             _fileHelper = fileHelper;
         }
-
-    
-        public IResult AddRental(CarImage carImage)
+        public IResult Add(IFormFile file, CarImage carImage)
         {
-            var result = BusinessRules.Run();
+            carImage.ImagePath = _fileHelper.Upload(file, PathConstant.ImagesPath);
+            carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        public IResult DeleteRental(CarImage carImage)
+        public IResult Delete(CarImage carImage)
         {
+            _fileHelper.Delete(PathConstant.ImagesPath + carImage.ImagePath);
             _carImageDal.Delete(carImage);
-            return new SuccessResult(Messages.CarImageDelete);
+            return new SuccessResult();
         }
 
         public IDataResult<List<CarImage>> GetAll()
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(),Messages.CarImageGetAll);
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
-        public IResult UpdateRental(CarImage carImage)
+        public IDataResult<CarImage> GetImageByImageId(int imageId)
         {
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == imageId));
+        }
+
+        public IResult Update(IFormFile file, CarImage carImage)
+        {
+            carImage.ImagePath = _fileHelper.Update(file, PathConstant.ImagesPath + carImage.ImagePath, PathConstant.ImagesPath);
             _carImageDal.Update(carImage);
-            return new SuccessResult(Messages.CarImageUpdate);
-        }
-
-        //Business Rules
-        private IResult CheckIfCarImageCount(int carId)
-        {
-            var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
-            if (result > 5)
-            {
-                return new ErrorResult(Messages.CarImageLimitExceded);
-            }
             return new SuccessResult();
         }
-        private IDataResult<List<CarImage>> GetDefaultCarImage(int carId)
+
+        private IResult CheckIfImageLimit(int carId)
+        {
+            var result = _carImageDal.GetAll(c => c.Id == carId).Count;
+
+            if (result >= 5)
+            {
+                return new ErrorResult();
+            }
+
+            return new SuccessResult();
+        }
+
+        private IDataResult<List<CarImage>> GetDefaultImage(int carId)
         {
             List<CarImage> carImages = new List<CarImage>();
-
-            carImages.Add(new CarImage
-            {
-                CarId = carId,
-                Date = DateTime.Now,
-                ImagePath = ""
-            });
+            carImages.Add(new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = "IZACHRENTACAR.jpg" });
             return new SuccessDataResult<List<CarImage>>(carImages);
         }
+
+
     }
 }

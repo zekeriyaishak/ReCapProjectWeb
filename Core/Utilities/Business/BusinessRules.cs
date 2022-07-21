@@ -24,4 +24,4 @@ namespace Core.Utilities.Business
         }
     }
 }
-}
+
