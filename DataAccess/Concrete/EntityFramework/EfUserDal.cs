@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -11,5 +12,18 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUserDal:EfEntityRepositoryBase<User,RentCarContext>, IUserDal
     {
+        public List<OperationClaim> GetClaims(User user)
+        {
+            using (var context = new RentCarContext())
+            {
+                var result = from operationClaim in context.OPERATIONCLAIMS
+                             join userOperationClaim in context.USEROPERATIONCLAIMS
+                                 on operationClaim.Id equals userOperationClaim.OperationClaimId
+                             where userOperationClaim.UserId == user.Id
+                             select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
+                return result.ToList();
+
+            }
+        }
     }
 }

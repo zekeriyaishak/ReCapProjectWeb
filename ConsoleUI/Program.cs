@@ -1,6 +1,7 @@
 ﻿    // See https://aka.ms/new-console-template for more information
 
 using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
