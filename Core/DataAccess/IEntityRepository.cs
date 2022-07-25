@@ -10,6 +10,7 @@ namespace Core.DataAccess
 {
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {
+        //CRUD - create update delete read
         List<T> GetAll(Expression<Func<T,bool>> filter=null);
         T Get(Expression<Func<T, bool>> filter);
 
