@@ -49,27 +49,14 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
+       
+
         public List<CarDetailsDto> GetCarDetails()
         {
             throw new NotImplementedException();
         }
 
-        public List<CarDetailsDto> GetCarDetailsByCarId(int carId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<CarDetailsDto> GetCarDetailsByColorAndByBrand(int colorId, int brandId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<CarDetailsDto> GetCarsByBrandId(int brandId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<CarDetailsDto> GetCarsByColorId(int colorId)
+        public List<CarDetailsDto> GetCarDetails(Expression<Func<CarDetailsDto, bool>> filter = null)
         {
             throw new NotImplementedException();
         }

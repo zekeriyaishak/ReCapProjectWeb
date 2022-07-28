@@ -67,13 +67,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);   
         }
 
-        [PerformanceAspect(10)]
-        //[SecuredOperation("user,admin,moderator")]
-        [CacheAspect]
-        public IDataResult<List<CarDetailsDto>> GetCarDetails()
-        {
-                return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails());
-        }
+      
 
         [PerformanceAspect(10)]
         //[SecuredOperation("user,admin,moderator")]
@@ -99,33 +93,25 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(p => p.Id == carId));
         }
 
+        public IDataResult<List<CarDetailsDto>> GetCarDetailByColorAndByBrand(int colorId, int brandId)
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(p=>p.ColorId == colorId && p.BrandId == brandId));
+        }
+
+        public IDataResult<List<CarDetailsDto>> GetCarDetails()
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails());
+        }
+
         //[SecuredOperation("admin,moderator")]
         public IResult Update(Car car)
         {
-             _carDal.Update(car);
+            _carDal.Update(car);
             return new SuccessResult(Messages.CarUptade);
         }
 
-        public IDataResult<List<CarDetailsDto>> GetCarsByBrandId(int brandId)
-        {
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarsByBrandId(brandId));
-        }
+   
 
-        public IDataResult<List<CarDetailsDto>> GetCarsByColorId(int colorId)
-        {
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarsByColorId(colorId));
-        }
-
-        public IDataResult<List<CarDetailsDto>> GetCarDetailsByCarId(int carId)
-        {
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetailsByCarId(carId));
-
-        }
-
-        public IDataResult<List<CarDetailsDto>> GetCarDetailsByColorAndByBrand(int colorId, int brandId)
-        {
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetailsByColorAndByBrand(colorId, brandId));
-        }
 
         //Business Rules
 
