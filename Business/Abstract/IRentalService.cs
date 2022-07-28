@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Business.Abstract
         IResult AddRental(Rental car);
         IResult UpdateRental(Rental car);
         IResult DeleteRental(Rental car);
+
     }
 }
