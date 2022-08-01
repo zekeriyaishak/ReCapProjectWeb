@@ -23,13 +23,14 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from c in rentCarContext.CARS
                              join b in rentCarContext.BRANDS
                              on c.BrandId equals b.BrandId
-                             join k in rentCarContext.COLORS
-                             on c.ColorId equals k.Id
-                             select new CarDetailsDto { CarId = c.Id,ColorId =k.Id ,BrandId =b.BrandId ,BrandName = b.BrandName,
-                             CarName= c.Description,ColorName=k.ColorName,DailyPrice=c.DailyPrice, ModelYear = c.ModelYear,
+                             join co in rentCarContext.COLORS
+                             on c.ColorId equals co.Id
+                             
+                             select new CarDetailsDto { CarId = c.Id,ColorId =co.Id ,BrandId =b.BrandId ,BrandName = b.BrandName,
+                             CarName= c.Description,ColorName=co.ColorName,DailyPrice=c.DailyPrice, ModelYear = c.ModelYear,
                              CarImages = (from i in rentCarContext.CARIMAGES where i.CarId == c.Id select i).ToList(),
                              };
-                return result.ToList();
+                return filter == null ? result.ToList(): result.Where(filter).ToList();
             }
         }
 

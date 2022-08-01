@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Security.Hashing
 {
+    //hash oluşşturmaya ve doğrulamaya yarıyo.
     public class HashingHelper
     {
         //out- keywordlaı oraya gönderilen iki tane değeri boş bile olsa doldurup geri döndürür

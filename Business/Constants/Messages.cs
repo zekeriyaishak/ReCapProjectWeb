@@ -51,7 +51,9 @@ namespace Business.Constants
         public static string CarListByColorSuccess = "Car listing by color has been successful";
         public static string CarBrandAndColorSuccess = "Car listing by brand id and color id has been successfull";
         public static string CarListSuccess = "Car listing has been successful";
-
-
+        public static string CreditCardAdded="Kredi Kartı eklenmiştir";
+        public static string CreditCardDeleted="Kredi kartı silinmiştir";
+        public static string CreditCardUptaded = "Kredi Kartı güncellenmiştir";
+        public static string CreditCardListed = "Kredi Kartı Listelenmiştir";
     }
 }

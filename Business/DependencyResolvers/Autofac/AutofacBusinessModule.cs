@@ -42,8 +42,10 @@ namespace Business.DependencyResolvers.Autofac
                 builder.RegisterType<FileHelper>().As<IFileHelper>().SingleInstance();
                 builder.RegisterType<AuthManager>().As<IAuthService>();
                 builder.RegisterType<JwtHelper>().As<ITokenHelper>();
-                
-                
+                builder.RegisterType<PaymentManager>().As<IPaymentService>().SingleInstance();
+                builder.RegisterType<EfPaymentDal>().As<IPaymentDal>().SingleInstance();
+
+
 
 
             //Aldım

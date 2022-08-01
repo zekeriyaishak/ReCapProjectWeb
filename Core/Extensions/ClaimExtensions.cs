@@ -11,6 +11,8 @@ namespace Core.Extensions
 
     public static class ClaimExtensions
     {
+        //Claims: Sisteme giriş yapan kullanıcının ek bilgilerinin tutulduğu yapıdır.
+        //Role: Sisteme giriş yapan kullanıcının hangi rol yapısında olduğunu ve rolün kullanıldığı yerlerde kontrol sağlayan yapıdır. 
         public static void AddEmail(this ICollection<Claim> claims, string email)
         {
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, email));

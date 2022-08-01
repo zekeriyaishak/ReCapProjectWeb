@@ -9,6 +9,7 @@ namespace Core.IoC
 {
     public interface ICoreModule
     {
+        //Ioc ile Uygulama içerisindeki obje instance'larının yönetimi sağlanarak, bağımlılıklarını en aza indirgemek amaçlanmaktadır. 
         void Load(IServiceCollection serviceCollection);
     }
 }

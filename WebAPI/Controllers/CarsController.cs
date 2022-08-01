@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getcardetailsbycolorandbybrand")]
+        [HttpGet("getcardetailbycolorandbybrand")]
         public IActionResult GetCarDetailsByColorAndByBrand(int colorId, int brandId)
         {
 
