@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Helpers.FileHelper.Concrete
 {
+    //IFormFile projemize bir dosya yüklemek için kulanılan yöntemdir, HttpRequest ile gönderilen bir dosyayı temsil eder.
+    //FileStream, Stream ana soyut sınıfı kullanılarak genişletilmiş, belirtilen kaynak dosyalar üzerinde okuma/yazma/atlama gibi operasyonları yapmamıza yardımcı olan bir sınıftır
     public class FileHelper : IFileHelper
     {
         public void Delete(string filePath)
@@ -57,5 +59,4 @@ namespace Core.Utilities.Helpers.FileHelper.Concrete
 
     }
 }
-//IFormFile projemize bir dosya yüklemek için kulanılan yöntemdir, HttpRequest ile gönderilen bir dosyayı temsil eder.
-//FileStream, Stream ana soyut sınıfı kullanılarak genişletilmiş, belirtilen kaynak dosyalar üzerinde okuma/yazma/atlama gibi operasyonları yapmamıza yardımcı olan bir sınıftır
+

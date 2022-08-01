@@ -33,7 +33,7 @@ namespace Core.Utilities.Security.JWT
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             //hangi alg ve anahtarı kullanayım diyor
             var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
-            //tokenoptions kullanarak ılgılı kullanıcı ve credentialsları kullanarak oluşturan method yaptık
+            //tokenoptions kullanarak ılgılı kullanıcı ve credentialsları(???) kullanarak oluşturan method yaptık
             var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);
