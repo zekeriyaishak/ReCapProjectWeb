@@ -14,7 +14,7 @@ namespace Core.Aspects.Caching
 /* Cacheaspect'e süre vermesek 60 dk durcak
 set manager olarak service tool'umuzu kullanarak
 Methodumn ismini bulup invocaton(getall) reflectedtype namespace+class ismi. method ismi ile key oluşturduk
-Norhwind.Business:ICarService.GetAll()
+abcprojesi.Business:ICarService.GetAll()
 methodun parametresini listele ve getall'un içine ekle varsa
 Bellekte Daha önce var mı? varsa çalıştırmadan methodu geri dön
 yoksa proceed yani methodu devam ettir ve add ile ekle*/

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Core.Extensions
 {
+    // HTTP isteğinde sunduğu talepleri ayıklar ve bunları HTTP yanıtına yazar. Geçerli kullanıcı' dan HttpContext olarak ClaimsPrincipalokunur.
+    // Talepler daha sonra ondan okunur ve ardından yanıta yazılır.
     public static class ClaimsPrincipalExtensions
     {
         public static List<string> Claims(this ClaimsPrincipal claimsPrincipal, string claimType)

@@ -21,42 +21,32 @@ namespace Business.Concrete
             _paymentDal = paymentDal;
         }
 
-        public IResult Add(CreditCard creditCard)
+        public IResult Add(Payment payment)
         {
-            _paymentDal.Add(creditCard);
-            return new SuccessResult(Messages.CreditCardAdded);
+            _paymentDal.Add(payment);
+            return new SuccessResult("Payment added");
         }
 
-        public IResult Delete(CreditCard creditCard)
+        public IResult Delete(Payment payment)
         {
-            _paymentDal.Delete(creditCard);
-            return new SuccessResult(Messages.CreditCardDeleted);
+            _paymentDal.Delete(payment);
+            return new SuccessResult("Payment deleted");
+        }
+        public IResult Update(Payment payment)
+        {
+            _paymentDal.Update(payment);
+            return new SuccessResult("payment updated");
         }
 
-        public IDataResult<List<CreditCard>> GetAll()
+        public IDataResult<List<Payment>> GetAll()
         {
-            return new SuccessDataResult<List<CreditCard>>(_paymentDal.GetAll(),Messages.CreditCardListed);
+            return new SuccessDataResult<List<Payment>>(_paymentDal.GetAll());
         }
 
-        public IDataResult<CreditCard> GetByCardNumber(string cardNumber)
+        public IDataResult<Payment> GetByPaymentId(int paymentId)
         {
-            return new SuccessDataResult<CreditCard>(_paymentDal.Get(p => p.CardNumber == cardNumber));
+            return new SuccessDataResult<Payment>(_paymentDal.Get(p => p.PaymentId == paymentId));
         }
 
-        public IDataResult<CreditCard> GetByCustomerId(int id)
-        {
-            return new SuccessDataResult<CreditCard>(_paymentDal.Get(p => p.CustomerId == id));
-        }
-
-        public IDataResult<CreditCard> GetById(int id)
-        {
-            return new SuccessDataResult<CreditCard>(_paymentDal.Get(p => p.Id == id));
-        }
-
-        public IResult Update(CreditCard creditCard)
-        {
-            _paymentDal.Update(creditCard);
-            return new SuccessResult(Messages.CreditCardUptaded);
-        }
     }
 }

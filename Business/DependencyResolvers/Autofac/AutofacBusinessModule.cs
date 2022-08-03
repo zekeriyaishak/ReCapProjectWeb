@@ -20,11 +20,11 @@ namespace Business.DependencyResolvers.Autofac
     public class AutofacBusinessModule: Module
     {
         //sen bir autofac modülüsün
-        
-            protected override void Load(ContainerBuilder builder)
+        //yani çalışma anında programın tek bir örneğinin oluşturulmasını, eğer program açıksa daha fazla örneğin oluşturulmaması için kullanılır
+        protected override void Load(ContainerBuilder builder)
             {
                 //autofac'de kayıt geliştirmek böyle oluyor.
-                //birisi sendeen IProductService isterse ona productmanager örneği ver demek. Tek bir instance oluşturur tutar
+                //birisi sendeen ICarService isterse ona Carmanager örneği ver demek. Tek bir instance oluşturur tutar
                 builder.RegisterType<CarManager>().As<ICarService>().SingleInstance();
                 builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
                 builder.RegisterType<BrandManager>().As<IBrandService>().SingleInstance();
@@ -44,11 +44,13 @@ namespace Business.DependencyResolvers.Autofac
                 builder.RegisterType<JwtHelper>().As<ITokenHelper>();
                 builder.RegisterType<PaymentManager>().As<IPaymentService>().SingleInstance();
                 builder.RegisterType<EfPaymentDal>().As<IPaymentDal>().SingleInstance();
+                builder.RegisterType<CreditCardManager>().As<ICreditCardService>().SingleInstance();
+                builder.RegisterType<EfCreditCardDal>().As<ICreditCardDal>().SingleInstance();
 
 
 
 
-            //Aldım
+            //Aldım- sadece bir şeyi denedim - önemsiz şimdilik
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

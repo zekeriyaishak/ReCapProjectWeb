@@ -77,5 +77,24 @@ namespace WebAPI.Controllers
             return BadRequest(result);
 
         }
+
+        [HttpGet("iscaravaible")]
+        public IActionResult IsCarAvaible(int cardId)
+        {
+            var result = _rentalService.IsCarAvaible(cardId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("totalprice")]
+        public IActionResult TotalPrice(object totalAmountInfo)
+        {
+
+            return Ok();
+
+        }
+
     }
 }

@@ -7,29 +7,50 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarImagesController : ControllerBase
+    public class CreditCardsController : ControllerBase
     {
-        ICarImageService _carImagesService;
+        ICreditCardService _creditCardService;
 
-        public CarImagesController(ICarImageService carImagesService)
+        public CreditCardsController(ICreditCardService creditCardService)
         {
-            _carImagesService = carImagesService;
+            _creditCardService = creditCardService;
         }
-        [HttpGet("GetAll")]
+
+        [HttpPost("add")]
+        public IActionResult Add(CreditCard card)
+        {
+            var result = _creditCardService.Add(card);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("delete")]
+        public IActionResult Delete(CreditCard card)
+        {
+            var result = _creditCardService.Delete(card);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("update")]
+        public IActionResult Update(CreditCard card)
+        {
+            var result = _creditCardService.Update(card);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var result = _carImagesService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        
-        [HttpGet("getbycarid")]
-        public IActionResult GetByCarId(int carId)
-        {
-            var result = _carImagesService.GetByCarId(carId);
+            var result = _creditCardService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -37,10 +58,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("Add")]
-        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage)
+        [HttpGet("GetById")]
+        public IActionResult GetById(int cardId)
         {
-            var result = _carImagesService.Add(file, carImage);
+            var result = _creditCardService.GetByCardId(cardId);
             if (result.Success)
             {
                 return Ok(result);
@@ -48,27 +69,5 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("Update")]
-        public IActionResult Update([FromForm] IFormFile file, CarImage carImage)
-        {
-            var result = _carImagesService.Update(file, carImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-
-        [HttpPost("Delete")]
-        public IActionResult Delete(CarImage carImage)
-        {
-            var result = _carImagesService.Delete(carImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
     }
 }
